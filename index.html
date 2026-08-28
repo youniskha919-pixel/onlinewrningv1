@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Make Money Online - trusted work opportunities and earning resources." />
+  <title>Make Money Online | Work Receive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Make Money Online home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>Make Money <em>Online</em></span>
+      </a>
+      <div class="header-actions">
+        <div class="live-pill"><span class="live-dot"></span><strong id="activeCount">187</strong> active users</div>
+        <button class="new-account-button" id="newAccountButton" type="button">New account</button>
+        <button class="icon-button" id="logoutButton" type="button" title="Log out" aria-label="Log out">
+          <span aria-hidden="true">↪</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="auth-screen" id="authScreen">
+        <div class="auth-copy">
+          <p class="eyebrow">A smarter way to start</p>
+          <h1>Turn your time<br /><span>into opportunity.</span></h1>
+          <p class="intro">Find practical online work, connect with a focused community, and take your next step with confidence.</p>
+          <div class="proof-row">
+            <div class="avatar-stack" aria-hidden="true"><span>R</span><span>M</span><span>A</span><span>+</span></div>
+            <p>Join a growing community<br /><strong>of online earners</strong></p>
+          </div>
+        </div>
+        <div class="auth-card">
+          <div class="card-heading">
+            <div>
+              <p class="eyebrow">Member access</p>
+              <h2 id="authTitle">Welcome back</h2>
+            </div>
+            <span class="lock-icon" aria-hidden="true">⌁</span>
+          </div>
+          <p class="card-subtitle" id="authSubtitle">Log in to view your work dashboard.</p>
+          <form id="authForm">
+            <label class="field-label signup-only" for="name">Your name</label>
+            <div class="input-wrap signup-only"><span aria-hidden="true">✦</span><input id="name" type="text" placeholder="e.g. Mahin Ahmed" autocomplete="name" /></div>
+            <label class="field-label" for="email">Email address</label>
+            <div class="input-wrap"><span aria-hidden="true">@</span><input id="email" type="email" placeholder="you@example.com" required autocomplete="email" /></div>
+            <label class="field-label" for="password">Password</label>
+            <div class="input-wrap"><span aria-hidden="true">••</span><input id="password" type="password" placeholder="Enter your password" required minlength="4" autocomplete="current-password" /><button class="password-toggle" type="button" id="togglePassword" aria-label="Show password">Show</button></div>
+            <button class="primary-button" type="submit"><span id="authButtonText">Enter dashboard</span><span aria-hidden="true">→</span></button>
+          </form>
+          <p class="form-message" id="formMessage" role="status"></p>
+          <p class="switch-auth"><span id="switchText">New here?</span> <button type="button" id="switchAuth">Create an account</button></p>
+          <div class="auth-support"><span>Need support?</span><a href="https://wa.me/8801844674690" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/zx34881920" target="_blank" rel="noopener">Telegram</a></div>
+        </div>
+      </section>
+
+      <section class="dashboard" id="dashboard" hidden>
+        <div class="dashboard-topline">
+          <div>
+            <p class="eyebrow">Your workspace</p>
+            <h1>Good to see you, <span id="userName">Member</span>.</h1>
+            <p class="dashboard-intro">Choose a work path and make your next move.</p>
+          </div>
+          <button class="add-member-button" id="addMemberButton" type="button"><span>+</span> Add member</button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card accent-lime"><span class="stat-icon">◉</span><p>Active community</p><strong id="dashboardActiveCount">187</strong><small>people online now</small></article>
+          <article class="stat-card accent-blue"><span class="stat-icon">↗</span><p>Work paths</p><strong>06</strong><small>ready to explore</small></article>
+          <article class="stat-card accent-pink"><span class="stat-icon">✦</span><p>Your status</p><strong>Ready</strong><small>profile is active</small></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="profile-panel panel">
+            <div class="panel-heading"><div><p class="eyebrow">Member profile</p><h2>Your profile</h2></div><span class="verified">✓ Verified</span></div>
+            <div class="profile-identity"><div class="profile-avatar" id="profileAvatar">M</div><div><h3 id="profileName">Member</h3><p id="profileEmail">member@example.com</p></div></div>
+            <div class="profile-details"><div><span>Member since</span><strong id="memberSince">Today</strong></div><div><span>Account type</span><strong>Standard member</strong></div></div>
+            <div class="profile-note"><span aria-hidden="true">i</span><p>Keep your profile active to unlock new work opportunities.</p></div>
+          </section>
+          <section class="support-panel panel"><p class="eyebrow">Need a hand?</p><h2>Talk to support</h2><p>Our support team is one click away. Send a message and we will guide you.</p><div class="support-links"><a class="support-link whatsapp" href="https://wa.me/8801844674690" target="_blank" rel="noopener"><span class="support-symbol">◔</span><span><strong>WhatsApp</strong><small>01844-674690</small></span><b>↗</b></a><a class="support-link telegram" href="https://t.me/zx34881920" target="_blank" rel="noopener"><span class="support-symbol">➤</span><span><strong>Telegram</strong><small>@zx34881920</small></span><b>↗</b></a></div></section>
+        </div>
+
+        <section class="work-section"><div class="section-heading"><div><p class="eyebrow">Pick your direction</p><h2>Work opportunities</h2></div><span>Updated today <i></i></span></div><div class="work-grid">
+          <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLSe2p12EK7scyHXLFOhUZQVjGR9Lk_BdkpRAQqJKDoidc9e5nA/viewform?usp=header" target="_blank" rel="noopener"><span class="work-number">01</span><span class="work-icon gmail">G</span><div><h3>Gmail work</h3><p>Start with email-based tasks</p></div><strong class="work-price">12 Taka</strong><span class="arrow">↗</span></a>
+          <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdfZcpE5gGBWGmGIlMCKcZW-XfyKOFL2lj3l-dzNoaWa62vGQ/viewform?usp=header" target="_blank" rel="noopener"><span class="work-number">02</span><span class="work-icon skrill">S</span><div><h3>Skrill work</h3><p>Explore payment opportunities</p></div><strong class="work-price">12.50 Taka</strong><span class="arrow">↗</span></a>
+          <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLScfNzlsDyVmjG0fNB3RC1NWOqVpsMcnZIhv8S8c5-0GIi-WRQ/viewform?usp=header" target="_blank" rel="noopener"><span class="work-number">03</span><span class="work-icon instagram">◎</span><div><h3>Instagram</h3><p>Social media work path</p></div><strong class="work-price">3.60 Taka</strong><span class="arrow">↗</span></a>
+          <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdMrzOV2eDfiSMNv8SHhSf0dSjqgBx9ZUqi4OPAj_ND4Kgv6Q/viewform?usp=publish-editor" target="_blank" rel="noopener"><span class="work-number">04</span><span class="work-icon facebook">f</span><div><h3>Facebook</h3><p>Build your social workflow</p></div><strong class="work-price">5 Taka</strong><span class="arrow">↗</span></a>
+          <a class="work-card highlighted" href="https://t.me/zx34881920" target="_blank" rel="noopener"><span class="work-number">05</span><span class="work-icon telegram-icon">➤</span><div><h3>Playstore offer farming</h3><p>Message Telegram inbox to apply</p></div><strong class="work-price">100 Taka / 4 plays</strong><span class="arrow">↗</span></a>
+          <a class="work-card highlighted dark" href="https://t.me/zx34881920" target="_blank" rel="noopener"><span class="work-number">06</span><span class="work-icon watch">◷</span><div><h3>Watch ad earning money</h3><p>Learn more through Telegram</p></div><span class="arrow">↗</span></a>
+        </div></section>
+
+        <section class="leaderboard-section"><div class="section-heading"><div><p class="eyebrow">Community progress</p><h2>Top work completers</h2></div><span>Live rankings <i></i></span></div><div class="leaderboard" id="leaderboard"></div></section>
+      </section>
+    </main>
+    <footer><span>Make Money Online</span><span>Work smart. Start today.</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="memberModal" hidden><div class="member-modal" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle"><button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button><p class="eyebrow">Grow your circle</p><h2 id="memberModalTitle">Add a member</h2><p>Save a teammate or referral to your workspace.</p><form id="memberForm"><label class="field-label" for="memberName">Member name</label><div class="input-wrap"><input id="memberName" type="text" placeholder="Full name" required /></div><label class="field-label" for="memberEmail">Email address</label><div class="input-wrap"><input id="memberEmail" type="email" placeholder="member@example.com" required /></div><button class="primary-button" type="submit">Add to workspace <span>→</span></button></form></div></div>
+  <script src="script.js"></script>
+</body>
+</html>
