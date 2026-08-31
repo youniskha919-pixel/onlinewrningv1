@@ -19,7 +19,7 @@
       </a>
       <div class="header-actions">
         <div class="live-pill"><span class="live-dot"></span><strong id="activeCount">187</strong> active users</div>
-        <button class="new-account-button" id="newAccountButton" type="button">New account</button>
+        <button class="new-account-button" id="newAccountButton" type="button" hidden>New account</button>
         <button class="icon-button" id="logoutButton" type="button" title="Log out" aria-label="Log out">
           <span aria-hidden="true">↪</span>
         </button>
@@ -27,13 +27,6 @@
     </header>
 
     <main id="top">
-      <div class="site-notice" aria-live="polite">
-        <div class="notice-track">
-          <span>⚠️ ১ তারিখ পর্যন্ত কাজ বন্ধ রাখা হয়েছে ব্যস্ততার কারণে। যারা কাজ দেন, তাদের পেমেন্ট ১ তারিখের পর পাবে।</span>
-          <span>⚠️ ১ তারিখ পর্যন্ত কাজ বন্ধ রাখা হয়েছে ব্যস্ততার কারণে। যারা কাজ দেন, তাদের পেমেন্ট ১ তারিখের পর পাবে।</span>
-        </div>
-      </div>
-
       <section class="auth-screen" id="authScreen">
         <div class="auth-copy">
           <p class="eyebrow">A smarter way to start</p>
@@ -80,11 +73,56 @@
 
         <div class="stats-grid">
           <article class="stat-card accent-lime"><span class="stat-icon">◉</span><p>Active community</p><strong id="dashboardActiveCount">187</strong><small>people online now</small></article>
-          <article class="stat-card accent-blue"><span class="stat-icon">↗</span><p>Work paths</p><strong>06</strong><small>ready to explore</small></article>
+          <article class="stat-card accent-blue"><span class="stat-icon">↗</span><p>Work paths</p><strong>10</strong><small>ready to explore</small></article>
           <article class="stat-card accent-pink"><span class="stat-icon">✦</span><p>Your status</p><strong>Ready</strong><small>profile is active</small></article>
         </div>
 
-        <div class="content-grid">
+        <div id="mainDashboardContent">
+          <div class="wallet-earning-wrap" id="walletEarningWrap" hidden>
+            <aside class="wallet-panel panel">
+              <div class="wallet-header">
+                <div>
+                  <p class="eyebrow">Wallet</p>
+                </div>
+                <div class="wallet-menu-wrap">
+                  <button class="wallet-menu" type="button" aria-label="Wallet menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                  </button>
+                  <div class="wallet-menu-panel" id="walletMenuPanel" hidden>
+                    <button class="wallet-menu-item active" type="button">Withdraw</button>
+                    <button class="wallet-menu-item" type="button">Balance</button>
+                  </div>
+                </div>
+              </div>
+              <div class="wallet-balance-box">
+                <div class="wallet-balance">
+                  <span>Points</span>
+                  <strong id="walletPoints">0</strong>
+                </div>
+                <span class="verified">Available</span>
+              </div>
+              <div class="wallet-actions">
+                <button class="primary-button wallet-withdraw" type="button">Withdraw <span>→</span></button>
+              </div>
+            </aside>
+
+            <section class="ad-panel panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Watch &amp; earn</p>
+                  <h2>Ad offers</h2>
+                </div>
+              </div>
+              <div class="ad-grid" id="adGrid">
+                <button class="ad-item" type="button" data-ad="1"><span class="ad-tag">Ad 01</span><strong>Watch ad</strong><small>+1 point</small></button>
+                <button class="ad-item" type="button" data-ad="2"><span class="ad-tag">Ad 02</span><strong>Watch ad</strong><small>+1 point</small></button>
+                <button class="ad-item" type="button" data-ad="3"><span class="ad-tag">Ad 03</span><strong>Watch ad</strong><small>+1 point</small></button>
+                <button class="ad-item" type="button" data-ad="4"><span class="ad-tag">Ad 04</span><strong>Watch ad</strong><small>+1 point</small></button>
+              </div>
+            </section>
+          </div>
+
+          <div class="content-grid">
           <section class="profile-panel panel">
             <div class="panel-heading"><div><p class="eyebrow">Member profile</p><h2>Your profile</h2></div><span class="verified">✓ Verified</span></div>
             <div class="profile-identity"><div class="profile-avatar" id="profileAvatar">M</div><div><h3 id="profileName">Member</h3><p id="profileEmail">member@example.com</p></div></div>
@@ -100,16 +138,51 @@
           <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLScfNzlsDyVmjG0fNB3RC1NWOqVpsMcnZIhv8S8c5-0GIi-WRQ/viewform?usp=header" target="_blank" rel="noopener"><span class="work-number">03</span><span class="work-icon instagram">◎</span><div><h3>Instagram</h3><p>Social media work path</p></div><strong class="work-price">3.60 Taka</strong><span class="arrow">↗</span></a>
           <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdMrzOV2eDfiSMNv8SHhSf0dSjqgBx9ZUqi4OPAj_ND4Kgv6Q/viewform?usp=publish-editor" target="_blank" rel="noopener"><span class="work-number">04</span><span class="work-icon facebook">f</span><div><h3>Facebook</h3><p>Build your social workflow</p></div><strong class="work-price">5 Taka</strong><span class="arrow">↗</span></a>
           <a class="work-card highlighted" href="https://t.me/zx34881920" target="_blank" rel="noopener"><span class="work-number">05</span><span class="work-icon telegram-icon">➤</span><div><h3>Playstore offer farming</h3><p>Message Telegram inbox to apply</p></div><strong class="work-price">100 Taka / 4 plays</strong><span class="arrow">↗</span></a>
-          <a class="work-card highlighted dark" href="https://t.me/zx34881920" target="_blank" rel="noopener"><span class="work-number">06</span><span class="work-icon watch">◷</span><div><h3>Watch ad earning money</h3><p>Learn more through Telegram</p></div><span class="arrow">↗</span></a>
+          <button class="work-card work-card-button highlighted dark" type="button" data-work-type="wallet"><span class="work-number">06</span><span class="work-icon watch">◷</span><div><h3>Watch ad earning money</h3><p>Open wallet and ad offers</p></div><span class="arrow">↗</span></button>
+          <button class="work-card work-card-button" type="button" data-work-type="exchange"><span class="work-number">07</span><span class="work-icon exchange-icon">€</span><div><h3>Exchange money</h3><p>Start exchange instantly</p></div><strong class="work-price">Fast transfer</strong><span class="arrow">↗</span></button>
+          <button class="work-card work-card-button" type="button" data-work-type="data-entry"><span class="work-number">08</span><span class="work-icon data-icon">D</span><div><h3>Data entry job</h3><p>Long form typing work</p></div><strong class="work-price">Bangla tasks</strong><span class="arrow">↗</span></button>
+          <button class="work-card work-card-button" type="button" data-work-type="lead-generation"><span class="work-number">09</span><span class="work-icon lead-icon">L</span><div><h3>Lead generation</h3><p>Lead collection work</p></div><strong class="work-price">High volume</strong><span class="arrow">↗</span></button>
+          <button class="work-card work-card-button" type="button" data-work-type="api-key"><span class="work-number">10</span><span class="work-icon api-icon">A</span><div><h3>API key buy &amp; sell</h3><p>Marketplace trading</p></div><strong class="work-price">Live deals</strong><span class="arrow">↗</span></button>
         </div></section>
 
-        <section class="leaderboard-section"><div class="section-heading"><div><p class="eyebrow">Community progress</p><h2>Top work completers</h2></div><span>Live rankings <i></i></span></div><div class="leaderboard" id="leaderboard"></div></section>
+        <section class="leaderboard-section"><div class="section-heading"><div><p class="eyebrow">Community progress</p><h2>TOP 10 Work completers</h2></div><span>Live rankings <i></i></span></div><div class="leaderboard" id="leaderboard"></div></section>
+        </div>
+
+        <div class="wallet-page" id="walletPage" hidden>
+          <div class="wallet-page-header">
+            <div>
+              <p class="eyebrow">Wallet</p>
+              <h2>Wallet center</h2>
+            </div>
+            <button class="back-button" id="walletBackButton" type="button">Back</button>
+          </div>
+
+          <div class="wallet-page-summary">
+            <div class="wallet-balance-box wallet-page-balance">
+              <div class="wallet-balance">
+                <span>Points</span>
+                <strong id="walletPointsPage">0</strong>
+              </div>
+              <span class="verified">Available</span>
+            </div>
+          </div>
+
+          <div class="ad-page-grid" id="adPageGrid" aria-label="100 ad offers">
+            <div class="super-zero-card ad-page-feature">
+              <p class="eyebrow">Super 0</p>
+              <button class="super-zero-button" id="superZeroButton" type="button">Click for random link</button>
+              <div class="super-zero-output" id="superZeroOutput" hidden></div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
     <footer><span>Make Money Online</span><span>Work smart. Start today.</span></footer>
   </div>
 
   <div class="modal-backdrop" id="memberModal" hidden><div class="member-modal" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle"><button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button><p class="eyebrow">Grow your circle</p><h2 id="memberModalTitle">Add a member</h2><p>Save a teammate or referral to your workspace.</p><form id="memberForm"><label class="field-label" for="memberName">Member name</label><div class="input-wrap"><input id="memberName" type="text" placeholder="Full name" required /></div><label class="field-label" for="memberEmail">Email address</label><div class="input-wrap"><input id="memberEmail" type="email" placeholder="member@example.com" required /></div><button class="primary-button" type="submit">Add to workspace <span>→</span></button></form></div></div>
+
+  <div class="modal-backdrop" id="workModal" hidden><div class="work-modal" role="dialog" aria-modal="true" aria-labelledby="workModalTitle"><button class="modal-close" id="closeWorkModal" type="button" aria-label="Close">×</button><div id="workModalBody"></div></div></div>
   <script src="script.js"></script>
 </body>
 </html>
