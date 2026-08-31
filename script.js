@@ -33,9 +33,10 @@ function createIdentityCode() {
 }
 
 function renderLeaderboard() {
+  if (!leaderboard) return; // safety
   leaderboard.innerHTML = leaderboardScores.map(({ name, completed, identityCode }, index) => {
     const rankClass = index < 3 ? ` rank-${index + 1}` : '';
-    return `<div class="leader-row${rankClass}"><strong class="leader-rank">${String(index + 1).padStart(2, '0')}</strong><span class="leader-avatar">${name.charAt(0)}</span><span class="leader-name">${name}<small>${identityCode}</small></span><span class="leader-completed">${completed} <small>works complete</small></span></div>`;
+    return `<div class="leader-row${rankClass}"><strong class="leader-rank">${String(index + 1).padStart(2, '0')}</strong><span class="leader-avatar">${name.charAt(0)}</span><span class="leader-name">${name}</span><div class="leader-meta"><span class="leader-completed"><strong>${completed}</strong> completed</span><span class="leader-code">${identityCode}</span></div></div>`;
   }).join('');
 }
 
@@ -48,6 +49,7 @@ function increaseLeaderboardScores() {
 }
 
 function scheduleLeaderboardUpdate() {
+  if (!leaderboard) return; // only schedule if leaderboard present
   const delay = (60 + Math.floor(Math.random() * 241)) * 1000;
   setTimeout(increaseLeaderboardScores, delay);
 }
@@ -61,97 +63,119 @@ function getStoredUser() {
 }
 
 function setText(user) {
-  const displayName = user.name || user.email.split('@')[0];
-  document.querySelector('#userName').textContent = displayName;
-  document.querySelector('#profileName').textContent = displayName;
-  document.querySelector('#profileEmail').textContent = user.email;
-  document.querySelector('#profileAvatar').textContent = displayName.charAt(0).toUpperCase();
+  const displayName = user.name || (user.email ? user.email.split('@')[0] : 'Member');
+  const elUserName = document.querySelector('#userName');
+  const elProfileName = document.querySelector('#profileName');
+  const elProfileEmail = document.querySelector('#profileEmail');
+  const elProfileAvatar = document.querySelector('#profileAvatar');
+  if (elUserName) elUserName.textContent = displayName;
+  if (elProfileName) elProfileName.textContent = displayName;
+  if (elProfileEmail && user.email) elProfileEmail.textContent = user.email;
+  if (elProfileAvatar) elProfileAvatar.textContent = displayName.charAt(0).toUpperCase();
 }
 
 function showDashboard(user) {
   setText(user);
-  authScreen.hidden = true;
-  dashboard.hidden = false;
+  if (authScreen) authScreen.hidden = true;
+  if (dashboard) dashboard.hidden = false;
 }
 
 function showAuth() {
-  authScreen.hidden = false;
-  dashboard.hidden = true;
+  if (authScreen) authScreen.hidden = false;
+  if (dashboard) dashboard.hidden = true;
 }
 
 function updateActiveUsers() {
   const count = Math.floor(100 + Math.random() * 101);
-  activeCount.textContent = count;
-  dashboardActiveCount.textContent = count;
+  if (activeCount) activeCount.textContent = count;
+  if (dashboardActiveCount) dashboardActiveCount.textContent = count;
 }
 
-switchAuth.addEventListener('click', () => {
-  isSignup = !isSignup;
-  document.querySelectorAll('.signup-only').forEach((element) => { element.style.display = isSignup ? 'block' : 'none'; });
-  authTitle.textContent = isSignup ? 'Create your account' : 'Welcome back';
-  authSubtitle.textContent = isSignup ? 'Join the community and unlock your workspace.' : 'Log in to view your work dashboard.';
-  authButtonText.textContent = isSignup ? 'Create account' : 'Enter dashboard';
-  switchText.textContent = isSignup ? 'Already a member?' : 'New here?';
-  switchAuth.textContent = isSignup ? 'Log in instead' : 'Create an account';
-  formMessage.textContent = '';
-  authForm.reset();
-});
+if (switchAuth) {
+  switchAuth.addEventListener('click', () => {
+    isSignup = !isSignup;
+    document.querySelectorAll('.signup-only').forEach((element) => { element.style.display = isSignup ? 'block' : 'none'; });
+    authTitle.textContent = isSignup ? 'Create your account' : 'Welcome back';
+    authSubtitle.textContent = isSignup ? 'Join the community and unlock your workspace.' : 'Log in to view your work dashboard.';
+    authButtonText.textContent = isSignup ? 'Create account' : 'Enter dashboard';
+    switchText.textContent = isSignup ? 'Already a member?' : 'New here?';
+    switchAuth.textContent = isSignup ? 'Log in instead' : 'Create an account';
+    formMessage.textContent = '';
+    if (authForm) authForm.reset();
+  });
+}
 
-togglePassword.addEventListener('click', () => {
-  const showing = passwordInput.type === 'text';
-  passwordInput.type = showing ? 'password' : 'text';
-  togglePassword.textContent = showing ? 'Show' : 'Hide';
-  togglePassword.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
-});
+if (togglePassword) {
+  togglePassword.addEventListener('click', () => {
+    const showing = passwordInput.type === 'text';
+    passwordInput.type = showing ? 'password' : 'text';
+    togglePassword.textContent = showing ? 'Show' : 'Hide';
+    togglePassword.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+  });
+}
 
-authForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const user = { name: nameInput.value.trim(), email: emailInput.value.trim() };
-  if (isSignup && !user.name) {
-    formMessage.textContent = 'Please enter your name to continue.';
-    nameInput.focus();
-    return;
-  }
-  localStorage.setItem('mmo-user', JSON.stringify(user));
-  formMessage.textContent = '';
-  showDashboard(user);
-});
+if (authForm) {
+  authForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const user = { name: nameInput.value.trim(), email: emailInput.value.trim() };
+    if (isSignup && !user.name) {
+      if (formMessage) formMessage.textContent = 'Please enter your name to continue.';
+      if (nameInput) nameInput.focus();
+      return;
+    }
+    localStorage.setItem('mmo-user', JSON.stringify(user));
+    if (formMessage) formMessage.textContent = '';
+    showDashboard(user);
+  });
+}
 
-logoutButton.addEventListener('click', () => {
-  localStorage.removeItem('mmo-user');
-  showAuth();
-  authForm.reset();
-});
+if (logoutButton) {
+  logoutButton.addEventListener('click', () => {
+    localStorage.removeItem('mmo-user');
+    showAuth();
+    if (authForm) authForm.reset();
+  });
+}
 
-newAccountButton.addEventListener('click', () => {
-  localStorage.removeItem('mmo-user');
-  showAuth();
-  authForm.reset();
-  if (!isSignup) switchAuth.click();
-});
+if (newAccountButton) {
+  newAccountButton.addEventListener('click', () => {
+    localStorage.removeItem('mmo-user');
+    showAuth();
+    if (authForm) authForm.reset();
+    if (!isSignup && switchAuth) switchAuth.click();
+  });
+}
 
 function closeMemberModal() {
-  memberModal.hidden = true;
+  if (memberModal) memberModal.hidden = true;
 }
 
-addMemberButton.addEventListener('click', () => {
-  memberModal.hidden = false;
-  document.querySelector('#memberName').focus();
-});
-closeModal.addEventListener('click', closeMemberModal);
-memberModal.addEventListener('click', (event) => { if (event.target === memberModal) closeMemberModal(); });
-memberForm.addEventListener('submit', (event) => {
+if (addMemberButton) {
+  addMemberButton.addEventListener('click', () => {
+    if (memberModal) memberModal.hidden = false;
+    const mName = document.querySelector('#memberName');
+    if (mName) mName.focus();
+  });
+}
+
+if (closeModal) closeModal.addEventListener('click', closeMemberModal);
+if (memberModal) memberModal.addEventListener('click', (event) => { if (event.target === memberModal) closeMemberModal(); });
+if (memberForm) memberForm.addEventListener('submit', (event) => {
   event.preventDefault();
   closeMemberModal();
   memberForm.reset();
-  addMemberButton.innerHTML = '<span>✓</span> Member added';
-  setTimeout(() => { addMemberButton.innerHTML = '<span>+</span> Add member'; }, 2200);
+  if (addMemberButton) {
+    addMemberButton.innerHTML = '<span>✓</span> Member added';
+    setTimeout(() => { addMemberButton.innerHTML = '<span>+</span> Add member'; }, 2200);
+  }
 });
 
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMemberModal(); });
 
 updateActiveUsers();
-renderLeaderboard();
-scheduleLeaderboardUpdate();
+if (typeof renderLeaderboard === 'function' && leaderboard) {
+  renderLeaderboard();
+  scheduleLeaderboardUpdate();
+}
 const currentUser = getStoredUser();
 if (currentUser?.email) showDashboard(currentUser);
