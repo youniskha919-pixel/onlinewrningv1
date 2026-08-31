@@ -141,6 +141,18 @@ function showAuth() {
   dashboard.hidden = true;
 }
 
+function initializeApp() {
+  const savedUser = getStoredUser();
+  if (savedUser && savedUser.email) {
+    showDashboard(savedUser);
+    return;
+  }
+
+  const demoUser = { name: 'Sayem', email: 'sayem@example.com' };
+  localStorage.setItem('mmo-user', JSON.stringify(demoUser));
+  showDashboard(demoUser);
+}
+
 function updateActiveUsers() {
   const count = Math.floor(100 + Math.random() * 101);
   activeCount.textContent = count;
@@ -619,7 +631,12 @@ updateActiveUsers();
 updateWalletDisplay();
 renderLeaderboard();
 scheduleLeaderboardUpdate();
-renderLeaderboard();
-scheduleLeaderboardUpdate();
-const currentUser = getStoredUser();
-if (currentUser?.email) showDashboard(currentUser);
+
+const savedUser = getStoredUser();
+if (savedUser && savedUser.email) {
+  showDashboard(savedUser);
+} else {
+  const demoUser = { name: 'Sayem', email: 'sayem@example.com' };
+  localStorage.setItem('mmo-user', JSON.stringify(demoUser));
+  showDashboard(demoUser);
+}
