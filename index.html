@@ -92,33 +92,14 @@
           <a class="work-card" href="https://docs.google.com/forms/d/e/1FAIpQLSdfZcpE5gGBWGmGIlMCKcZW-XfyKOFL2lj3l-dzNoaWa62vGQ/viewform?usp=header" target="_blank" rel="noopener"><span class="work-number">02</span><div><h3>Task 2</h3></div></a>
         </div></section>
 
-        <section class="leaderboard-section">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Community progress</p>
-              <h2>Top work completers</h2>
-            </div>
-            <span>Live rankings <i></i></span>
-          </div>
-
-          <!-- Milestone control + leaderboard container -->
-          <div class="leaderboard-controls">
-            <label for="milestoneInput">Milestone:</label>
-            <input id="milestoneInput" type="number" value="300" min="1" />
-            <button id="refreshLeaderboard" type="button">Refresh</button>
-          </div>
-
-          <div id="leaderboard" class="leaderboard-list" aria-live="polite">
-            <!-- JS will render top-10 rows here -->
-          </div>
-        </section>
+        <section class="leaderboard-section"><div class="section-heading"><div><p class="eyebrow">Community progress</p><h2>Top work completers</h2></div><span>Live rankings <i></i></span></div><div id="leaderboard" class="leaderboard-list" aria-live="polite"></div></section>
       </section>
     </main>
 
     <footer><span>Make Money Online</span><span>Work smart. Start today.</span></footer>
   </div>
 
-  <div class="modal-backdrop" id="memberModal" hidden>...existing modal content...</div>
+  <div class="modal-backdrop" id="memberModal" hidden><div class="member-modal" role="dialog" aria-modal="true" aria-labelledby="memberModalTitle"><button class="modal-close" id="closeModal" type="button">✕</button><form id="memberForm"><h3 id="memberModalTitle">Add member</h3><label for="memberName">Name</label><input id="memberName" required /><label for="memberEmail">Email</label><input id="memberEmail" type="email" required /><div class="modal-actions"><button type="submit" class="primary-button">Add</button><button type="button" id="cancelAdd">Cancel</button></div></form></div></div>
   <script src="script.js"></script>
 </body>
 </html>
