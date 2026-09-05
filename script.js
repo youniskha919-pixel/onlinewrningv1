@@ -34,18 +34,21 @@ const superZeroOutput = document.querySelector('#superZeroOutput');
 let isSignup = false;
 let walletPointsValue = Number(localStorage.getItem('mmo-wallet-points') || 0);
 
-const leaderboardNames = ['Sayem', 'Md Asik', 'Nusrat Jahan', 'Tanvir Hasan', 'Sadia Akter', 'Rafi Islam', 'Mim Sultana', 'Shuvo Ahmed', 'Jannat Ara', 'Arif Hossain'];
+function randomWorkCount() {
+  return Math.floor(500 + Math.random() * 401);
+}
+
 const leaderboardScores = [
-  { name: 'Sayem', completed: 500, identityCode: 'MMO-SY500+' },
-  { name: 'Md Asik', completed: 260, identityCode: 'MMO-AS260' },
-  { name: 'Nusrat Jahan', completed: 210, identityCode: 'MMO-NJ210' },
-  { name: 'Tanvir Hasan', completed: 180, identityCode: 'MMO-TH180' },
-  { name: 'Sadia Akter', completed: 170, identityCode: 'MMO-SA170' },
-  { name: 'Mehedy Islam', completed: 160, identityCode: 'MMO-RI160' },
-  { name: 'Mim Sultana', completed: 150, identityCode: 'MMO-MS150' },
-  { name: 'Shuvo Ahmed', completed: 140, identityCode: 'MMO-SH140' },
-  { name: 'Jannat Ara', completed: 130, identityCode: 'MMO-JA130' },
-  { name: 'Arif Hossain', completed: 120, identityCode: 'MMO-AH120' }
+  { name: 'Sayem', completed: 1000, identityCode: 'MMO-SY1000+' },
+  { name: 'Md Asik', completed: randomWorkCount(), identityCode: 'MMO-AS900' },
+  { name: 'Nahid Islam', completed: randomWorkCount(), identityCode: 'MMO-NI820' },
+  { name: 'Tanvir Hasan', completed: randomWorkCount(), identityCode: 'MMO-TH760' },
+  { name: 'Sadia Akter', completed: randomWorkCount(), identityCode: 'MMO-SA700' },
+  { name: 'Mehedy Islam', completed: randomWorkCount(), identityCode: 'MMO-RI650' },
+  { name: 'Mim Sultana', completed: randomWorkCount(), identityCode: 'MMO-MS600' },
+  { name: 'Shuvo Ahmed', completed: randomWorkCount(), identityCode: 'MMO-SH580' },
+  { name: 'Jannat Ara', completed: randomWorkCount(), identityCode: 'MMO-JA540' },
+  { name: 'Arif Hossain', completed: randomWorkCount(), identityCode: 'MMO-AH500' }
 ];
 
 function renderLeaderboard() {
@@ -71,6 +74,14 @@ function scheduleLeaderboardUpdate() {
 function getStoredUser() {
   try {
     return JSON.parse(localStorage.getItem('mmo-user'));
+  } catch {
+    return null;
+  }
+}
+
+function getStoredAccount() {
+  try {
+    return JSON.parse(localStorage.getItem('mmo-account'));
   } catch {
     return null;
   }
@@ -143,14 +154,14 @@ function showAuth() {
 
 function initializeApp() {
   const savedUser = getStoredUser();
-  if (savedUser && savedUser.email) {
+  const savedAccount = getStoredAccount();
+  if (savedUser && savedUser.email && savedAccount && savedAccount.email === savedUser.email) {
     showDashboard(savedUser);
     return;
   }
 
-  const demoUser = { name: 'Sayem', email: 'sayem@example.com' };
-  localStorage.setItem('mmo-user', JSON.stringify(demoUser));
-  showDashboard(demoUser);
+  localStorage.removeItem('mmo-user');
+  showAuth();
 }
 
 function updateActiveUsers() {
@@ -370,12 +381,32 @@ togglePassword.addEventListener('click', () => {
 
 authForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  const user = { name: nameInput.value.trim(), email: emailInput.value.trim() };
-  if (isSignup && !user.name) {
-    formMessage.textContent = 'Please enter your name to continue.';
-    nameInput.focus();
-    return;
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim().toLowerCase();
+  const password = passwordInput.value;
+
+  if (isSignup) {
+    if (!name) {
+      formMessage.textContent = 'Please enter your name to continue.';
+      nameInput.focus();
+      return;
+    }
+
+    localStorage.setItem('mmo-account', JSON.stringify({ name, email, password }));
+  } else {
+    const account = getStoredAccount();
+    if (!account) {
+      formMessage.textContent = 'Please create an account before logging in.';
+      return;
+    }
+    if (account.email !== email || account.password !== password) {
+      formMessage.textContent = 'Email or password is incorrect.';
+      return;
+    }
   }
+
+  const account = getStoredAccount();
+  const user = { name: account.name, email: account.email };
   localStorage.setItem('mmo-user', JSON.stringify(user));
   formMessage.textContent = '';
   showDashboard(user);
@@ -390,6 +421,7 @@ logoutButton.addEventListener('click', () => {
 if (newAccountButton) {
   newAccountButton.addEventListener('click', () => {
     localStorage.removeItem('mmo-user');
+    localStorage.removeItem('mmo-account');
     showAuth();
     authForm.reset();
     if (!isSignup) switchAuth.click();
@@ -632,11 +664,4 @@ updateWalletDisplay();
 renderLeaderboard();
 scheduleLeaderboardUpdate();
 
-const savedUser = getStoredUser();
-if (savedUser && savedUser.email) {
-  showDashboard(savedUser);
-} else {
-  const demoUser = { name: 'Sayem', email: 'sayem@example.com' };
-  localStorage.setItem('mmo-user', JSON.stringify(demoUser));
-  showDashboard(demoUser);
-}
+initializeApp();
